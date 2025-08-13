@@ -3,9 +3,12 @@
   <div class="container-fluid">
     <a class="navbar-brand link-light" href="{% url 'shop' %}"><img src="{% static 'bilder/logo.png' %}" alt="TechMax Logo"></a>
     <ul class="navbar-nav">
-      <div class="d-flex">
-          <a class="nav-link p-2 link-light" href="#">Login</a>
-          <a class="nav-link p-2 link-light" href="{% url 'warenkorb' %}">Warenkorb</a>
+      <div class="d-flex align-items-center">
+          <a class="nav-link p-2 btn btn-light" href="#">Login</a>
+          <a class="nav-link p-2 link-light" href="{% url 'warenkorb' %}">
+            <img src="{% static 'bilder/floppy.png' %}" alt="">
+            <span class="badge rounded-pill bg-danger posizion-absolute top-25 start-25 translate-middle">3</span>
+          </a>
       </div>
     </ul>
   </div>
