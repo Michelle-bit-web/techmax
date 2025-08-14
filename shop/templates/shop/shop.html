@@ -6,7 +6,11 @@
     {% for artikel in artikel %}
     <div class="col mb-3">
         <div class="card" style="max-width: 25rem">
-            <img src="{% static 'bilder/kopfhoerer.jpg' %}" class="card-img-top" alt="..." />
+            {% if artikel.bild %}
+            <img src="{{artikel.bild.url}}" class="card-img-top" alt="{{artikel.name}}" />
+            {% else %}
+            <img src="{% static 'bilder/dummy.jpg' %}" class="card-img-top" alt="Placeholder if image not found" />
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ artikel.name }}</h5>
                 <p class="card-text">{{ artikel.beschreibung }}</p>
