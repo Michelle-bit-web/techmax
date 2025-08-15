@@ -15,8 +15,18 @@ def warenkorb(request):
         artikel = bestellung.bestellteartikel_set.all()
     else:
         artikel = []
-    ctx = {'artikel': artikel}
+        bestellung = []
+    ctx = {'artikel': artikel, 'bestellung': bestellung}
     return render(request, 'shop/warenkorb.html', ctx)
 
 def kasse(request):
-    return render(request, 'shop/kasse.html')
+    if request.user.is_authenticated:
+        kunde = request.user.kunde
+        bestellung, created = Bestellung.objects.get_or_create(kunde=kunde, erledigt=False)
+        artikel = bestellung.bestellteartikel_set.all()
+    else:
+        artikel = []
+        bestellung = []
+
+    ctx = {'artikel': artikel, 'bestellung': bestellung}
+    return render(request, 'shop/kasse.html', ctx)
