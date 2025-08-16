@@ -7,7 +7,9 @@
           <a class="nav-link p-2 btn btn-light" href="#">Login</a>
           <a class="nav-link p-2 link-light" href="{% url 'warenkorb' %}">
             <img src="{% static 'bilder/floppy.png' %}" alt="">
+            {% if menge > 0 %}
             <span class="badge rounded-pill bg-danger posizion-absolute top-25 start-25 translate-middle">{{menge}}</span>
+            {% endif %}
           </a>
       </div>
     </ul>

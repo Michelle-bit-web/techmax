@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from . models import *
 from django.http import JsonResponse
 import json
@@ -43,8 +44,10 @@ def artikelBackend(request):
     bestellteArtikel, created = BestellteArtikel.objects.get_or_create(bestellung=bestellung, artikel=artikel)
     if action == 'bestellen':
         bestellteArtikel.menge += 1
+        messages.success(request, 'Artikel zum Warenkorb hinzugefügt.')
     elif action == 'entfernen':
         bestellteArtikel.menge -= 1
+        messages.warning(request, 'Artikel aus dem Warenkorb entfernt')
     bestellteArtikel.save()
     if bestellteArtikel.menge <= 0:
         bestellteArtikel.delete()
