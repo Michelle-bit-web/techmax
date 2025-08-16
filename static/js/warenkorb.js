@@ -23,10 +23,6 @@ function updateKundenBestellung(artikelID, action) {
             'action': action
         })
     })
-    .then(response => response.json())   // <-- wichtig: warte auf Antwort
-    .then(data => {
-        console.log('Response:', data)
-        location.reload()
-    })
+    .then(() => location.reload())
     .catch(error => console.error('Error:', error))
 }
