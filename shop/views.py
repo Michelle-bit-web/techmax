@@ -4,7 +4,7 @@ from . models import *
 from django.http import JsonResponse
 import json
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+from . forms import EigeneUserCreationForm
 
 # Create your views here.
 
@@ -15,7 +15,7 @@ def shop(request):
 
 def warenkorb(request):
     if request.user.is_authenticated:
-        kunde = request.benutzer.kunde
+        kunde = request.user.kunde
         bestellung, created = Bestellung.objects.get_or_create(kunde=kunde, erledigt=False)
         artikel = bestellung.bestellteartikel_set.all()
     else:
@@ -75,10 +75,10 @@ def logoutUser(request):
 
 def regUser(request):
     page = 'reg'
-    form = UserCreationForm
+    form = EigeneUserCreationForm
     
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = EigeneUserCreationForm(request.POST)
         if form.is_valid():
             benutzer = form.save(commit=False)
             benutzer.save()
