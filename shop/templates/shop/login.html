@@ -1,0 +1,39 @@
+{% extends 'shop/index.html' %}
+
+{% block content %} 
+{% if page == 'login' %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="userInput" class="form-label">User</label>
+            <input type="text" name="username" class="form-control" id="userInput">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-secondary">Login</button>
+        <hr>
+        <p>
+            Not registered?
+            <a href="{% url 'register' %}" class="link-success">Register now</a>
+        </p>
+    </form>
+</div>
+{%  else %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-secondary">Register</button>
+         <hr>
+        <p>
+           Already have an account?
+            <a href="{% url 'login' %}" class="link-success">Login now</a>
+        </p>
+    </form>
+</div>
+{% endif %}
+
+{% endblock content %}
